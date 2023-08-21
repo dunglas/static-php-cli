@@ -170,9 +170,10 @@ class MacOSBuilder extends BuilderBase
                 '--disable-phpdbg ' .
                 '--enable-cli ' .
                 '--enable-fpm ' .
+                '--enable-embed=static ' .
                 $json_74 .
                 '--enable-micro ' .
-                ($this->zts ? '--enable-zts' : '') . ' ' .
+                ($this->zts ? '--enable-zts --disable-zend-signals' : '') . ' ' .
                 $this->makeExtensionArgs() . ' ' .
                 $this->configure_env
             );

@@ -193,9 +193,10 @@ class LinuxBuilder extends BuilderBase
                 '--disable-phpdbg ' .
                 '--enable-cli ' .
                 '--enable-fpm ' .
+                '--enable-embed=static ' .
                 $json_74 .
                 '--enable-micro=all-static ' .
-                ($this->zts ? '--enable-zts' : '') . ' ' .
+                ($this->zts ? '--enable-zts --disable-zend-signals --enable-zend-max-execution-timers' : '') . ' ' .
                 $this->makeExtensionArgs() . ' ' .
                 $envs
             );

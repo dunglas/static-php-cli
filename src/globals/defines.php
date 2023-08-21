@@ -43,6 +43,7 @@ const BUILD_TARGET_NONE = 0;
 const BUILD_TARGET_CLI = 1;
 const BUILD_TARGET_MICRO = 2;
 const BUILD_TARGET_FPM = 4;
+const BUILD_TARGET_EMBED = 5;
 const BUILD_TARGET_ALL = 7;
 
 // doctor error fix policy
