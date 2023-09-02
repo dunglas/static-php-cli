@@ -31,15 +31,28 @@ class SystemUtil
     /**
      * Get Target Arch CFlags
      *
-     * @param  string              $arch Arch Name
+     * @param  string              $targetArch Arch Name
      * @return string              return Arch CFlags string
      * @throws WrongUsageException
      */
-    public static function getArchCFlags(string $arch): string
+    public static function getArchCFlags(string $targetArch): string
+    {
+        $hostArch = php_uname('m');
+        if ($hostArch === $targetArch) {
+            return '';
+        }
+
+        // $hostTriple = self::getTargetTriple($hostArch);
+        $targetTriple = self::getTargetTriple($targetArch);
+
+        return "--host={$hostArch} --target={$targetTriple}";
+    }
+
+    private static function getTargetTriple(string $arch): string
     {
         return match ($arch) {
-            'x86_64' => '--target=x86_64-apple-darwin',
-            'arm64','aarch64' => '--target=arm64-apple-darwin',
+            'x86_64' => 'x86_64-apple-darwin',
+            'arm64','aarch64' => 'arm64-apple-darwin',
             default => throw new WrongUsageException('unsupported arch: ' . $arch),
         };
     }
